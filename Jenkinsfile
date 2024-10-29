@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    environment {
+        DOCKER_WORKDIR = '/var/jenkins_home/workspace/docker-ci-cd' // Adjusted to Linux path
+    }
 
     stages {
         stage('Checkout') {
@@ -7,7 +11,6 @@ pipeline {
                 git url: 'https://github.com/rinwi-smith/docker-ci-cd.git', branch: 'main'
             }
         }
-        
         stage('Build') {
             steps {
                 script {
@@ -15,7 +18,6 @@ pipeline {
                 }
             }
         }
-        
         stage('Test') {
             steps {
                 script {
@@ -26,7 +28,6 @@ pipeline {
                 }
             }
         }
-        
         stage('Deploy') {
             steps {
                 script {
@@ -38,4 +39,3 @@ pipeline {
         }
     }
 }
-
