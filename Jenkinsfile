@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_WORKDIR = '/var/jenkins_home/workspace/docker-ci-cd' // Adjusted to Linux path
+        PROJECT_DIR = 'C:/Users/Dareal/OneDrive/Documents/projects/docker-ci-cd' // Adjusted to Linux path
     }
 
     stages {
