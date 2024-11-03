@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    
+
     environment {
-        PROJECT_DIR = 'C:/Program Files/Jenkins/.jenkins/workspace/docker-ci-cd' // Adjusted to Linux path
+        PROJECT_DIR = 'C:\\Program Files\\Jenkins\\.jenkins\\workspace\\docker-ci-cd' // Windows path with escaped backslashes
     }
 
     stages {
@@ -22,8 +22,8 @@ pipeline {
             steps {
                 script {
                     docker.image('my-node-app').inside {
-                        sh 'npm install'
-                        sh 'npm test'
+                        bat 'npm install'  // Use bat for Windows
+                        bat 'npm test'     // Use bat for Windows
                     }
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     docker.image('my-node-app').inside {
-                        sh 'npm run deploy'
+                        bat 'npm run deploy'  // Use bat for Windows
                     }
                 }
             }
