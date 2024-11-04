@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    environment {
-        PROJECT_DIR = '/C/Program Files/Jenkins/.jenkins/workspace/docker-ci-cd' // Windows path with escaped backslashes
+   environment {
+        PROJECT_DIR = '/c/ProgramData/Jenkins/.jenkins/workspace/docker-ci-cd' // Jenkins workspace path in Unix format
     }
 
     stages {
