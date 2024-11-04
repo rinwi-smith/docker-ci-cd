@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-   environment {
+    environment {
         PROJECT_DIR = '/c/ProgramData/Jenkins/.jenkins/workspace/docker-ci-cd' // Jenkins workspace path in Unix format
     }
 
@@ -21,9 +21,9 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image('my-node-app').inside {
-                        bat 'npm install'  // Use bat for Windows
-                        bat 'npm test'     // Use bat for Windows
+                    docker.image('my-node-app').inside('--workdir /usr/src/app') { // Unix format for workdir inside container
+                        sh 'npm install'
+                        sh 'npm test'
                     }
                 }
             }
@@ -31,8 +31,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.image('my-node-app').inside {
-                        bat 'npm run deploy'  // Use bat for Windows
+                    docker.image('my-node-app').inside('--workdir /usr/src/app') {
+                        sh 'npm run deploy'
                     }
                 }
             }
