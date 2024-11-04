@@ -14,26 +14,25 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build('my-node-app', '.')
+                    // Build the Docker image using Docker Compose
+                    bat 'docker-compose build'
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    docker.image('my-node-app').inside('--workdir /usr/src/app') { // Unix format for workdir inside container
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
+                    // Run tests using Docker Compose
+                    bat 'docker-compose run app npm install'
+                    bat 'docker-compose run app npm test'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    docker.image('my-node-app').inside('--workdir /usr/src/app') {
-                        sh 'npm run deploy'
-                    }
+                    // Deploy using Docker Compose
+                    bat 'docker-compose run app npm run deploy'
                 }
             }
         }
